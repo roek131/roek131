@@ -30,5 +30,17 @@ public class HomeController {
 		
 		return "home";
 	}
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
 	
+		
+		return "login";
+	}
+	
+	@RequestMapping(value = "/board", method = RequestMethod.GET)
+	public String board() {
+	
+		
+		return "board";
+	}
 }
