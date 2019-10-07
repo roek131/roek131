@@ -16,11 +16,34 @@
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+<!-- 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+	</beans:bean> -->
+		<!-- thymeleaf 사용을 위한 ViewResolver ▼-->
+	<beans:bean id="templateResolver" class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".html" />
+		<beans:property name="cacheable" value="false"></beans:property>
+		<beans:property name="characterEncoding" value="UTF-8" />
 	</beans:bean>
 	
+	<beans:bean id="templateEngine" class="org.thymeleaf.spring5.SpringTemplateEngine">
+		<beans:property name="templateResolver" ref="templateResolver" />
+		<beans:property name="enableSpringELCompiler" value="true" />
+		<beans:property name="additionalDialects">
+			<beans:set>
+				<beans:bean class="nz.net.ultraq.thymeleaf.LayoutDialect" />
+			</beans:set>
+		</beans:property> 
+	</beans:bean>
+	<!-- thymeleaf ▲-->
+	
+	<!-- 한글처리를 위한 코드 -->
+	<beans:bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+		<beans:property name="characterEncoding" value="UTF-8" />
+		<beans:property name="templateEngine" ref="templateEngine" />
+	</beans:bean>
 	<context:component-scan base-package="com.example.why" />
 	
 	

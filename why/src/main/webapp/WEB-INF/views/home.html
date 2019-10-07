@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="include/layout">
+<th:block layout:fragment="page_head">
+	<title>HOME</title>
+</th:block>
+<!-- page_lib와 page_css 는 위와 같이 추가하여 사용-->
+<th:block layout:fragment="contents">
+<table class="table table-hover"> <!-- table-hover -->
+            <thead>
+              <tr>
+                <th class="col-ml-2">번호</th>
+                <th class="col-xs-6">제목</th>
+                <th class="col-xs-2">글쓴이(ID)</th>
+                <th class="col-xs-1">등록일</th>
+                <th class="col-xs-2">조회수</th>
+          		<th class="col-xs-2">좋아요</th>              
+              </tr>
+            </thead>
+            <tbody>
+            <tr  th:each="post : ${post}">
+            <td th:text="${post.pnum}"></td>
+            <td th:text="${post.title}"></td>
+            <td th:text="${post.id}"></td>
+            <td th:text="${post.postdate}"></td>
+            <td th:text="${post.look}"></td>
+            <td th:text="${post.good}"></td>
+            </tr>
+	</tbody>
+	</table>
+</th:block>
+<!-- page_js 필요하면 추가 -->
+</html>

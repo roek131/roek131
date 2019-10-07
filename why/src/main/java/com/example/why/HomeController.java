@@ -1,37 +1,32 @@
 package com.example.why;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- * Handles requests for the application home page.
- */
+import com.example.domain.postVO;
+import com.example.service.postservice;
+
+
+import lombok.AllArgsConstructor;
+
+
 @Controller
+@AllArgsConstructor
 public class HomeController {
+
+	private postservice post;
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
+	public String home( Model model) {
+		System.out.println("아");
+		ArrayList<postVO> postlist = new ArrayList<postVO>();
+			postlist = post.postList();
+			model.addAttribute("post", postlist);
 		
 		return "home";
 	}
