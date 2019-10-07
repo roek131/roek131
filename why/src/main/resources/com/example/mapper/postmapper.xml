@@ -4,4 +4,7 @@
 <select id="postList" resultType="com.example.domain.postVO"> 
 select * from posts 
 </select> 
+<select id="login" resultType="com.example.domain.memberVO"> 
+select * from member where id=#{id} and pw=#{pw} 
+</select> 
 </mapper>

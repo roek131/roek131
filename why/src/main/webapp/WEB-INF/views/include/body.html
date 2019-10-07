@@ -15,9 +15,12 @@
       <li class="nav-item active">
         <a class="nav-link" href="/">홈 <span class="sr-only"></span></a>
       </li>
-      <li class="nav-item">
+  
+      <li class="nav-item" th:if="${session.user == null}" id="login">
         <a class="nav-link" href="/login">로그인</a>
       </li>
+	 <li th:if="${session.user}">
+		<span th:text="${session.user.name}" id="logout" class="nav-link" style="color:white;"> </span>
       <li class="nav-item">
         <a class="nav-link" href="/logout">로그아웃</a>
       </li>
@@ -35,7 +38,6 @@
 
 	<!-- 특정 페이지 전용 js들 -->
 	<th:block layout:fragment="page_js" />
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
 </body>

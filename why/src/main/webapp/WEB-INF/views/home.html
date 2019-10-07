@@ -5,11 +5,27 @@
 	layout:decorator="include/layout">
 <th:block layout:fragment="page_head">
 	<title>HOME</title>
+		<script>
+	$(document).ready(function() {
+		$("#postup").click(function() {
+			window.location = "/board";
+			
+		});
+	});
+	</script>
+	<style>
+	 .main{padding: 3%;}
+	 .title{margin-top: 2%; margin-left: 5%;}
+	 #postup{float: right; margin-right: 5%;}
+	</style>
 </th:block>
 <!-- page_lib와 page_css 는 위와 같이 추가하여 사용-->
 <th:block layout:fragment="contents">
+<div class="title">
 <h3>게시판</h3>
-<button>글쓰기</button>
+<button type="button" class="btn btn-primary" id="postup">글쓰기</button>
+</div>
+<div class="main">
 <table class="table table-hover"> <!-- table-hover -->
             <thead>
               <tr>
@@ -32,6 +48,7 @@
             </tr>
 	</tbody>
 	</table>
+	</div>
 </th:block>
 <!-- page_js 필요하면 추가 -->
 </html>

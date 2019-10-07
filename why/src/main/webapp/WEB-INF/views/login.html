@@ -5,7 +5,13 @@
 	layout:decorator="include/layout">
 <th:block layout:fragment="page_head">
 	<title>로그인</title>
-	
+	<script>
+	$(document).ready(function() {
+		$("#login").click(function() {
+			alert("로그인");
+		});
+	});
+	</script>
 	<style>
     .container{ margin-top: 12%; margin-right: 100px;}
     
@@ -22,17 +28,17 @@
                 <div class="panel-title">환영합니다!</div>
             </div>
             <div class="panel-body">
-                <form id="login-form">
+                <form id="login-form" method="post" action="/login">
                     <div>
-                        <input type="text" class="form-control" name="username" placeholder="Username" autofocus>
+                        <input type="text" class="form-control" id="id" name="id" placeholder="Username" autofocus>
                     </div>
                     <br>
                     <div>
-                        <input type="password" class="form-control" name="password" placeholder="Password">
+                        <input type="password" class="form-control" id="pw" name="pw" placeholder="Password">
                     </div>
                     <br>
                     <div>
-                        <button type="submit" class="form-control btn btn-primary">로그인</button>
+                    <button type="submit" class="btn btn-primary" id="login">로그인</button>
                     </div>
                 </form>
             </div>

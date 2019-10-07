@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
+import com.example.domain.memberVO;
 import com.example.domain.postVO;
 import com.example.mapper.postmapper;
 
@@ -19,6 +20,12 @@ public class postserviceimplement implements postservice {
 	public ArrayList<postVO> postList() {
 		// TODO Auto-generated method stub
 		return mapper.postList();
+	}
+
+	@Override
+	public memberVO login(String id, String pw) {
+		// TODO Auto-generated method stub
+		return mapper.login(id,pw);
 	}
 
 }
