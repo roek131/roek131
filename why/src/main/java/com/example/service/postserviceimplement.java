@@ -28,4 +28,10 @@ public class postserviceimplement implements postservice {
 		return mapper.login(id,pw);
 	}
 
+	@Override
+	public ArrayList<memberVO> loginCheck(String id, String pw) {
+		// TODO Auto-generated method stub
+		return mapper.loginCheck(id,pw);
+	}
+
 }

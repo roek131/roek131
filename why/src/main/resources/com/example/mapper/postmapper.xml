@@ -6,5 +6,12 @@ select * from posts
 </select> 
 <select id="login" resultType="com.example.domain.memberVO"> 
 select * from member where id=#{id} and pw=#{pw} 
+</select>
+<select id="loginCheck" resultType="com.example.domain.memberVO"> 
+select * from member where id=#{id} and pw=#{pw} 
 </select> 
+<insert id="newmebmer" parameterType="com.example.domain.memberVO">
+		insert into dogs(id,pw,name)
+		values(#{id},#{pw},#{name})
+</insert>
 </mapper>

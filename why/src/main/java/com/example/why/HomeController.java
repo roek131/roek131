@@ -2,6 +2,7 @@ package com.example.why;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
@@ -47,15 +48,30 @@ public class HomeController {
 		System.out.println("여기옴?");
 		System.out.println(userInfo.getId());
 		System.out.println(userInfo.getPw());
+		
 		memberVO user= post.login(userInfo.getId(),userInfo.getPw());
+		ArrayList<memberVO> u = post.loginCheck(userInfo.getId(), userInfo.getPw());
+		System.out.println(u);
+		if (u.size() == 0) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('아이디가 존재하지 않거나 비밀번호가 일치하지 않습니다.'); </script>");
+			out.flush();
+			return "/login";
+		}
 		session.setAttribute("user", user);
 		return "home";
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String loginForm(HttpSession session) {
+	public String logout(HttpSession session) {
 		session.invalidate();
 		return "home";
+	}
+	@RequestMapping(value = "/newmember", method = RequestMethod.GET)
+	public String newmember(HttpSession session) {
+		
+		return "newmember";
 	}
 	@RequestMapping(value = "/board", method = RequestMethod.GET)
 	public String board() {
