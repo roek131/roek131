@@ -13,6 +13,8 @@ public interface postservice {
 	public memberVO login(String id, String pw);
 
 	public ArrayList<memberVO> loginCheck(String id, String pw);
+
+	public ArrayList<memberVO> idcheck(String id);
 	
 	
 

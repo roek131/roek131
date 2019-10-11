@@ -14,6 +14,7 @@ public interface postmapper {
 
 	public ArrayList<memberVO> loginCheck(@Param("id") String id, @Param("pw") String pw);
 
+	public ArrayList<memberVO> idcheck(@Param("id") String id);
 
 
 }
