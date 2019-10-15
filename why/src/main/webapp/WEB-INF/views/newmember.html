@@ -12,6 +12,7 @@
 	<script>
 	$(document).ready(function() {
 		//아이디중복체크
+		var pwc=0;
 		$("#idch").click(function() {
 			var id =$("#id").val();
 			if(id != ""){
@@ -49,23 +50,46 @@
 	                if(pwd1 == pwd2){
 	                    $("#alert-success").show();
 	                    $("#alert-danger").hide();
+	                   	pwc=1;
+	            		console.log(pwc);
 	                }else{
 	                    $("#alert-success").hide();
 	                    $("#alert-danger").show();
+	                  	pwc=0;
+	            		console.log(pwc);
 	                }    
 	            }
 	        });
 	    });
 		//가입
-	  $("#newm").click(function() {
+	   $("#newm").click(function() {
+    		console.log("ㅇ?"+pwc);
 	 	if($("#chok").text()=="사용가능"){
-	 	
+	 		if(pwc==1){
+	 			var id = $("#id").val();
+	 			var pw = $("#password").val();
+	 			var name= $("#name").val();
+	 			$.ajax({
+					url : "/upid",
+					type : "POST",
+					dataType : 'text',
+					data : {
+						id : id,
+						pw : pw,
+						name : name
+					},
+					success : function(data) {
+						alert("가입완료");
+						window.location.href = "/login"; 
+					}
+	 			});
+	 		}else{
+	 			alert("비밀번호 틀림니다");
 	 		}
-	    	  
-		}else if($("#chok").text()=="사용불가"){
+	 		}else if($("#chok").text()=="사용불가"||$("#chok").text()=="체크"){
 			alert("아이디 체크해주세요");
 		} 
-	  });
+	  }); 
 });	//제이쿼리
 
 	

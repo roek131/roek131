@@ -63,7 +63,7 @@ public class HomeController {
 			return "/login";
 		}
 		session.setAttribute("user", user);
-		return "home";
+		return "/home";
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -76,6 +76,15 @@ public class HomeController {
 		
 		return "newmember";
 	}
+	@RequestMapping(value = "/upid", method = RequestMethod.POST)
+	@ResponseBody
+	public String upid(Model model,@RequestParam String id,@RequestParam String pw,@RequestParam String name) {
+		System.out.println(id + pw + name );
+		ArrayList<memberVO> idup = new ArrayList<memberVO>();
+	   Integer upid = post.newmember(id,pw,name);
+			return "success";
+	} 
+	
 	@RequestMapping(value = "/idcheck", method = RequestMethod.POST)
 	@ResponseBody
 	public String pet_delete(Model model,@RequestParam String id) {

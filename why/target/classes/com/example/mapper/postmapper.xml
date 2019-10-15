@@ -13,8 +13,8 @@ select * from member where id=#{id} and pw=#{pw}
 <select id="idcheck" resultType="com.example.domain.memberVO"> 
 select * from member where id=#{id}
 </select>
-<insert id="newmebmer" parameterType="com.example.domain.memberVO">
-		insert into dogs(id,pw,name)
+<insert id="newmember" parameterType="com.example.domain.memberVO">
+		insert into member(id,pw,name)
 		values(#{id},#{pw},#{name})
 </insert>
 </mapper>

@@ -40,6 +40,12 @@ public class postserviceimplement implements postservice {
 		return mapper.idcheck(id);
 	}
 
+	@Override
+	public Integer newmember(String id, String pw, String name) {
+		// TODO Auto-generated method stub
+		return mapper.newmember(id,pw,name);
+	}
+
 	
 	
 
