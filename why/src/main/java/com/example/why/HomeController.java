@@ -63,13 +63,13 @@ public class HomeController {
 			return "/login";
 		}
 		session.setAttribute("user", user);
-		return "/home";
+		 return "redirect:/";
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "home";
+		return "redirect:/";
 	}
 	@RequestMapping(value = "/newmember", method = RequestMethod.GET)
 	public String newmember(HttpSession session) {
@@ -102,5 +102,11 @@ public class HomeController {
 	
 		
 		return "board";
+	}
+	@RequestMapping(value = "/post", method = RequestMethod.GET)
+	public String post() {
+	
+		
+		return "post";
 	}
 }

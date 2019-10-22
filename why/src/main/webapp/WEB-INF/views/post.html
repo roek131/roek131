@@ -4,10 +4,83 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="include/layout">
 <th:block layout:fragment="page_head">
+	<style>
+.mains {
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 4%;
+}
+
+.hed {
+	border-top: 2px solid #2e4361;
+	background-color: #f1f7ff;
+	padding: 10px 10px;
+	height: 50px;
+	width: auto;
+}
+
+.context {
+	height: 350px;
+	width: auto;
+	padding: 1%;
+}
+
+.good {
+	text-align: right;
+}
+
+.coment {
+	border-top: 2px solid #2e4361;
+}
+.ed.comment-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    background-color: #e8e8e8;
+    border-radius: 4px;
+}
+</style>
 	<title>HOME</title>
 </th:block>
 <!-- page_lib와 page_css 는 위와 같이 추가하여 사용-->
 <th:block layout:fragment="contents">
+	<div class="mains">
+		<h2>제목</h2>
+		<div class="hed">
+			<span>작성자</span> <span>날짜</span> <span>조회수</span>
+		</div>
+		<div class="context">내용</div>
+		<div class="good">
+			첨부파일
+		</div>
+		<div>
+			<button>삭제</button>
+			<button>수정</button>
+			<button>목록</button>
+			<br>
+		</div>
+		<div class="coment">
+		댓글
+		<br>
+		<div>
+			<div class="ed flex flex-middle margin-bottom-xxsmall comment-bar">
+					<span style="vertical-align: middle; margin: 0px 3px 2px 0px;">정신질환상담사</span>
+			</div>
+			<div>
+			<p>대한민국에 다신 안나올 치트키 집단.....</p>
+			</div>
+		<br>
+		</div>
+		</div>
+		
+		
+		<div>
+			댓글 <br>
+			<textarea cols="10" placeholder="내용을 입력하세요. " name="content"
+				class="form-control"></textarea>
+			<button>댓글</button>
+		</div>
+	</div>
 
 </th:block>
 <!-- page_js 필요하면 추가 -->
