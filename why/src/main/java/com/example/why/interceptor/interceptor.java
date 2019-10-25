@@ -13,6 +13,7 @@ public class interceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user") == null) {
 			response.sendRedirect("/login");
+			
 			return false;
 		} else
 			return true;
