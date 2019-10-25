@@ -7,9 +7,25 @@
 	<title>글쓰기</title>
 	<script>
 	$(document).ready(function() {
-		$("#postup").click(function() {
-			alert("쓰기");
+		
+		$("#postups").click(function() {
+		var query =  {	title : $('#titles').val(), context : $('#context').val()
+				};
+				console.log($("#titles"));
+				console.log($("#titles").val());
+//				insert ajax
+	 		$.ajax({
+			    	url: "/newboard",
+			    	type: "POST",
+			    	data : query,
+			    	dataType: "json", // controller return을 json으로 받음
+			    	success : function(data){
+			    		alert("됨");
+			    	}, error: function(data) {
+			    		console.log(data);
+			    	}
 			
+			}); 
 		});
 	});
 	</script>
@@ -26,18 +42,18 @@
     <div style="padding : 30px;">
           <div class="form-group">
             <label>제목</label>
-            <input type="text" name="subject" class="form-control">
+            <input type="text" class="form-control" id="titles">
           </div>
 
           <div class="form-group">
             <label>내용</label>
-            <textarea name="content" class="form-control" rows="15"></textarea>
+            <textarea name="content" class="form-control" rows="15" id="context"></textarea>
           </div>
           <div class="form-group">
 			<label>파일</label>
 			dddd
           </div>
-          <button type="button" class="btn btn-primary" id="postup">글쓰기</button>
+          <button type="button" class="btn btn-primary" id="postups">글쓰기</button>
 </div>
 </th:block>
 <!-- page_js 필요하면 추가 -->

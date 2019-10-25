@@ -24,6 +24,8 @@ public interface postservice {
 	public ArrayList<comentVO> coment(String pnum);
 
 	public int newreply(comentVO comentVO);
+
+	public int newpost(postVO postVO);
 	
 
 }

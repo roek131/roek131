@@ -107,6 +107,21 @@ public class HomeController {
 		
 		return "board";
 	}
+	@RequestMapping(value = "/newboard", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject newboard(Model model,postVO postVO,HttpSession session, HttpServletRequest request) {
+		System.out.println("글쓰기");
+		String name = ((memberVO) request.getSession().getAttribute("user")).getName();
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		postVO.setName(name);
+		int newboard = post.newpost(postVO);
+		System.out.println(postVO);
+		map.put("result", newboard);
+		JSONObject json = JSONObject.fromObject(map);
+		System.out.println(json);
+		return json;
+	}
+
 	@RequestMapping(value = "/post/{pnum}", method = RequestMethod.GET)
 	public String post(@PathVariable String pnum,Model model) {
 		System.out.println("ㅎ이"+pnum);

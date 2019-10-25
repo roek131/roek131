@@ -65,6 +65,12 @@ public class postserviceimplement implements postservice {
 		return mapper.newreply(comentVO);
 	}
 
+	@Override
+	public int newpost(postVO postVO) {
+		// TODO Auto-generated method stub
+		return mapper.newpost(postVO);
+	}
+
 	
 	
 

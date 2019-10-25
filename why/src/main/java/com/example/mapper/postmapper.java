@@ -25,5 +25,7 @@ public interface postmapper {
 
 	public int newreply(comentVO comentVO);
 
+	public int newpost(postVO postVO);
+
 
 }

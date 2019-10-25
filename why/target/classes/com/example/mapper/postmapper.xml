@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.postmapper">
 <select id="postList" resultType="com.example.domain.postVO"> 
-select * from posts 
+select context,look,title,pnum,name,TO_CHAR(postdate, 'YYYY-MM-DD')as postdates from posts
 </select> 
 <select id="postdetail" resultType="com.example.domain.postVO"> 
 select * from posts where pnum=#{pnum}
@@ -27,5 +27,8 @@ select * from member where id=#{id}
 		insert into coment(pnum,ccode,text,name)
 		values(#{pnum},3,#{text},#{name})
 </insert>
-
+<insert id="newpost" parameterType="map">
+		insert into posts(pnum,title,context,postdate,name,look)
+		values(POSTSEQ.nextval,#{title},#{context},sysdate,#{name},0)
+</insert>
 </mapper>

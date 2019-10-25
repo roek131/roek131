@@ -32,7 +32,7 @@
               <tr>
                 <th class="col-ml-2">번호</th>
                 <th class="col-xs-6">제목</th>
-                <th class="col-xs-2">글쓴이(ID)</th>
+                <th class="col-xs-2">글쓴이</th>
                 <th class="col-xs-1">등록일</th>
                 <th class="col-xs-2">조회수</th>            
               </tr>
@@ -43,7 +43,7 @@
             <td><a th:href="@{/post/{pnum}(pnum=${post.pnum})}">
             <span th:text="${post.title}"></span></a></td>
             <td th:text="${post.name}"></td>
-            <td th:text="${post.postdate}"></td>
+            <td th:text="${post.postdates}"></td>
             <td th:text="${post.look}"></td>
             </tr>
 	</tbody>

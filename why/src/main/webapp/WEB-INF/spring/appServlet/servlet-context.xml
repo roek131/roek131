@@ -26,11 +26,13 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/post/**" />
+			<mapping path="/board/**" />
 			<exclude-mapping path="/login/**" />
 			<beans:bean id="interceptor"
 				class="com.example.why.interceptor.interceptor" />
 		</interceptor>
 	</interceptors>
+	
 	<!-- thymeleaf 사용을 위한 ViewResolver ▼ -->
 	<beans:bean id="templateResolver"
 		class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">

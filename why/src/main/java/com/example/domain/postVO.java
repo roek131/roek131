@@ -13,5 +13,5 @@ public class postVO {
  private String good;
  private String look;
  private Timestamp postdate;
- 
+ private String postdates;
 }
