@@ -11,6 +11,7 @@
 			window.location = "/board";
 			
 		});
+	
 	});
 	</script>
 	<style>
@@ -33,18 +34,17 @@
                 <th class="col-xs-6">제목</th>
                 <th class="col-xs-2">글쓴이(ID)</th>
                 <th class="col-xs-1">등록일</th>
-                <th class="col-xs-2">조회수</th>
-          		<th class="col-xs-2">좋아요</th>              
+                <th class="col-xs-2">조회수</th>            
               </tr>
             </thead>
             <tbody>
-            <tr  th:each="post : ${post}">
+            <tr th:each="post : ${post}">
             <td th:text="${post.pnum}"></td>
-            <td th:text="${post.title}"></td>
-            <td th:text="${post.id}"></td>
+            <td><a th:href="@{/post/{pnum}(pnum=${post.pnum})}">
+            <span th:text="${post.title}"></span></a></td>
+            <td th:text="${post.name}"></td>
             <td th:text="${post.postdate}"></td>
             <td th:text="${post.look}"></td>
-            <td th:text="${post.good}"></td>
             </tr>
 	</tbody>
 	</table>

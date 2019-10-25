@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class postVO {
  private String pnum;
- private String id;
+ private String name;
  private String title;
  private String context;
  private String good;

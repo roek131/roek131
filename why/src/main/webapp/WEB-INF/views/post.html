@@ -40,16 +40,44 @@
     border-radius: 4px;
 }
 </style>
-	<title>HOME</title>
+<script>
+$(document).ready(function(){
+	var para = document.location.href.split("/");
+	var pnum = para[4];
+
+	console.log(pnum);
+	
+	$('#aa').click(function() {
+		var query =  {
+				text : $('#reply').val(), pnum : pnum ,ccode : 1
+		};
+		console.log(query);
+//		insert ajax
+ 		$.ajax({
+	    	url: "/reply",
+	    	type: "POST",
+	    	data : query,
+	    	dataType: "json", // controller return을 json으로 받음
+	    	success : function(data){
+	    		location.reload();
+	    	}, error: function(data) {
+	    		console.log(data);
+	    	}
+		}); 
+	});
+});
+</script>
+	<title>게시글</title>
 </th:block>
 <!-- page_lib와 page_css 는 위와 같이 추가하여 사용-->
 <th:block layout:fragment="contents">
-	<div class="mains">
-		<h2>제목</h2>
+	<div class="mains" th:each="post : ${post}">
+		<h2><p th:text="${post.title}"></p></h2>
+		<span ></span>
 		<div class="hed">
-			<span>작성자</span> <span>날짜</span> <span>조회수</span>
+			<span>작성자:</span><span th:text="${post.name}"></span> <span>작성일:</span><span th:text="${post.postdate}"></span><span>조회수:<span th:text="${post.look}"></span></span>
 		</div>
-		<div class="context">내용</div>
+		<div class="context"><span th:text="${post.context}"></span></div>
 		<div class="good">
 			첨부파일
 		</div>
@@ -62,12 +90,12 @@
 		<div class="coment">
 		댓글
 		<br>
-		<div>
+		<div th:each="coment : ${coment}">
 			<div class="ed flex flex-middle margin-bottom-xxsmall comment-bar">
-					<span style="vertical-align: middle; margin: 0px 3px 2px 0px;">정신질환상담사</span>
+					<span style="vertical-align: middle; margin: 0px 3px 2px 0px;" th:text="${coment.name}">정신질환상담사</span>
 			</div>
 			<div>
-			<p>대한민국에 다신 안나올 치트키 집단.....</p>
+			<p th:text="${coment.text}"></p>
 			</div>
 		<br>
 		</div>
@@ -77,8 +105,8 @@
 		<div>
 			댓글 <br>
 			<textarea cols="10" placeholder="내용을 입력하세요. " name="content"
-				class="form-control"></textarea>
-			<button>댓글</button>
+				class="form-control" id="reply"></textarea>
+			<button id="aa">쓰기</button>
 		</div>
 	</div>
 

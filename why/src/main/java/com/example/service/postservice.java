@@ -2,6 +2,7 @@ package com.example.service;
 
 import java.util.ArrayList;
 
+import com.example.domain.comentVO;
 import com.example.domain.memberVO;
 import com.example.domain.postVO;
 
@@ -18,7 +19,11 @@ public interface postservice {
 
 	public Integer newmember(String id, String pw, String name);
 
-	
+	public ArrayList<postVO> postdetail(String pnum);
+
+	public ArrayList<comentVO> coment(String pnum);
+
+	public int newreply(comentVO comentVO);
 	
 
 }

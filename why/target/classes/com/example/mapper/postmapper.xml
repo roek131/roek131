@@ -4,6 +4,12 @@
 <select id="postList" resultType="com.example.domain.postVO"> 
 select * from posts 
 </select> 
+<select id="postdetail" resultType="com.example.domain.postVO"> 
+select * from posts where pnum=#{pnum}
+</select>
+<select id="coment" resultType="com.example.domain.comentVO"> 
+select * from coment where pnum=#{pnum}
+</select>
 <select id="login" resultType="com.example.domain.memberVO"> 
 select * from member where id=#{id} and pw=#{pw} 
 </select>
@@ -17,4 +23,9 @@ select * from member where id=#{id}
 		insert into member(id,pw,name)
 		values(#{id},#{pw},#{name})
 </insert>
+<insert id="newreply" parameterType="map">
+		insert into coment(pnum,ccode,text,name)
+		values(#{pnum},3,#{text},#{name})
+</insert>
+
 </mapper>

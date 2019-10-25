@@ -4,6 +4,8 @@ package com.example.why;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,17 +13,19 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.domain.comentVO;
 import com.example.domain.memberVO;
 import com.example.domain.postVO;
 import com.example.service.postservice;
 
-
 import lombok.AllArgsConstructor;
+import net.sf.json.JSONObject;
 
 
 @Controller
@@ -103,10 +107,39 @@ public class HomeController {
 		
 		return "board";
 	}
-	@RequestMapping(value = "/post", method = RequestMethod.GET)
-	public String post() {
-	
+	@RequestMapping(value = "/post/{pnum}", method = RequestMethod.GET)
+	public String post(@PathVariable String pnum,Model model) {
+		System.out.println("ㅎ이"+pnum);
+		ArrayList<postVO> postdetail = new ArrayList<postVO>();
+		ArrayList<comentVO> comnets = new ArrayList<comentVO>();
+		postdetail = post.postdetail(pnum);
+		comnets = post.coment(pnum);
+		System.out.println(comnets);
+		model.addAttribute("post", postdetail);
+		model.addAttribute("coment", comnets);
 		
 		return "post";
 	}
+	
+	@RequestMapping(value = "/reply", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject reply(Model model,comentVO comentVO,HttpSession session, HttpServletRequest request) {
+		System.out.println("댓글쓰기");
+	
+		String name = ((memberVO) request.getSession().getAttribute("user")).getName();
+			
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		comentVO.setName(name);
+		System.out.println(comentVO);
+	
+		int newreply = post.newreply(comentVO);
+		System.out.println(newreply);
+		map.put("result", newreply);
+		
+		JSONObject json = JSONObject.fromObject(map);
+		System.out.println(json);
+		
+			return json;
+	}
+	
 }
