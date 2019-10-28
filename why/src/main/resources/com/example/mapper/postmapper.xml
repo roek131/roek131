@@ -31,4 +31,9 @@ select * from member where id=#{id}
 		insert into posts(pnum,title,context,postdate,name,look)
 		values(POSTSEQ.nextval,#{title},#{context},sysdate,#{name},0)
 </insert>
+
+<delete id="postdel" parameterType="com.example.domain.postVO">
+		delete from posts where pnum = #{pnum} and name = #{name}
+</delete>
+
 </mapper>

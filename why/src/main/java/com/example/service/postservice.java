@@ -26,6 +26,8 @@ public interface postservice {
 	public int newreply(comentVO comentVO);
 
 	public int newpost(postVO postVO);
+
+	public int postdel(String pnum, String name);
 	
 
 }

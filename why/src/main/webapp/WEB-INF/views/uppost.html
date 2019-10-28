@@ -4,9 +4,9 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="include/layout">
 <th:block layout:fragment="page_head">
-	<title>글쓰기</title>
+	<title>수정</title>
 	<script>
-	$(document).ready(function() {
+/* 	$(document).ready(function() {
 		
 		$("#postups").click(function() {
 			var titles= $('#titles').val();
@@ -35,7 +35,7 @@
 			});  
 			}
 		});
-	});
+	}); */
 	</script>
 	<style>
 
@@ -46,8 +46,8 @@
 
 <!-- page_lib와 page_css 는 위와 같이 추가하여 사용-->
 <th:block layout:fragment="contents">
-<h3>게시글 작성</h3>
-    <div style="padding : 30px;">
+<h3>게시글  수정</h3>
+    <div id="mainsa"style="padding : 30px;">
           <div class="form-group">
             <label>제목</label>
             <input type="text" class="form-control" id="titles">
@@ -61,7 +61,7 @@
 			<label>파일</label>
 			dddd
           </div>
-          <button type="button" class="btn btn-primary" id="postups">글쓰기</button>
+          <button type="button" class="btn btn-primary" id="postups">수정</button>
 </div>
 </th:block>
 <!-- page_js 필요하면 추가 -->

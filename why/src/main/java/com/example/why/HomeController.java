@@ -91,7 +91,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/idcheck", method = RequestMethod.POST)
 	@ResponseBody
-	public String pet_delete(Model model,@RequestParam String id) {
+	public String idcheck(Model model,@RequestParam String id) {
 		System.out.println(id);
 		ArrayList<memberVO> idch = new ArrayList<memberVO>();
 		idch = post.idcheck(id);
@@ -120,6 +120,18 @@ public class HomeController {
 		JSONObject json = JSONObject.fromObject(map);
 		System.out.println(json);
 		return json;
+	}
+	@RequestMapping(value = "/delpost", method = RequestMethod.POST)
+	@ResponseBody
+	public String delpost(Model model,@RequestParam String pnum,HttpSession session, HttpServletRequest request) {
+		System.out.println(pnum);
+		String name = ((memberVO) request.getSession().getAttribute("user")).getName();
+		Integer del = post.postdel(pnum,name);
+		System.out.println(del);
+		if(del == 0) {
+			return "no";
+		}
+			return "success";
 	}
 
 	@RequestMapping(value = "/post/{pnum}", method = RequestMethod.GET)
@@ -156,5 +168,13 @@ public class HomeController {
 		
 			return json;
 	}
-	
+	@RequestMapping(value = "/uppost", method = RequestMethod.GET)
+	public String uppost( Model model) {
+		System.out.println("수정페이지");
+		ArrayList<postVO> postlist = new ArrayList<postVO>();
+//			postlist = post.postList();
+//			model.addAttribute("post", postlist);
+//		
+		return "uppost";
+	}
 }

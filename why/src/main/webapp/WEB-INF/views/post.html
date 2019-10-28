@@ -65,6 +65,33 @@ $(document).ready(function(){
 	    	}
 		}); 
 	});
+	$('#list').click(function() {
+		window.location = "/";
+	});
+	$('#upl').click(function() {
+	//	window.location = "/uppost";
+		$(".mains").load("/uppost #mainsa");
+	});
+	$('#del').click(function() {
+		
+		$.ajax({
+			url : "/delpost",
+			type : "POST",
+			dataType : 'text',
+			data : {
+				pnum : pnum
+			},
+			success : function(data) {
+				console.log(data);
+			 if(data == "success"){
+				 alert("삭제되었습니다");
+				 window.location = "/";
+			 }if(data=="no"){
+				 alert("사용자가 아닙니다.");
+			 }
+			} 
+			});
+	});
 });
 </script>
 	<title>게시글</title>
@@ -82,9 +109,9 @@ $(document).ready(function(){
 			첨부파일
 		</div>
 		<div>
-			<button>삭제</button>
-			<button>수정</button>
-			<button>목록</button>
+			<button id="del">삭제</button>
+			<button id="upl">수정</button>
+			<button id="list">목록</button>
 			<br>
 		</div>
 		<div class="coment">
@@ -92,7 +119,7 @@ $(document).ready(function(){
 		<br>
 		<div th:each="coment : ${coment}">
 			<div class="ed flex flex-middle margin-bottom-xxsmall comment-bar">
-					<span style="vertical-align: middle; margin: 0px 3px 2px 0px;" th:text="${coment.name}">정신질환상담사</span>
+					<span style="vertical-align: middle; margin: 0px 3px 2px 0px;" th:text="${coment.name}"></span>
 			</div>
 			<div>
 			<p th:text="${coment.text}"></p>
