@@ -28,6 +28,9 @@ public interface postservice {
 	public int newpost(postVO postVO);
 
 	public int postdel(String pnum, String name);
+
+	public Integer postup(String title, String context, String pnum);
+
 	
 
 }

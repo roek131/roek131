@@ -44,9 +44,10 @@
 $(document).ready(function(){
 	var para = document.location.href.split("/");
 	var pnum = para[4];
-
-	console.log(pnum);
-	
+	var myname = $("#name").text();
+	var poname = $("#poname").text();
+	console.log(myname);
+	console.log(poname);
 	$('#aa').click(function() {
 		var query =  {
 				text : $('#reply').val(), pnum : pnum ,ccode : 1
@@ -68,9 +69,20 @@ $(document).ready(function(){
 	$('#list').click(function() {
 		window.location = "/";
 	});
+	$('#postups').click(function() {
+		//	window.location = "/uppost";
+			alert("딤");
+		});
 	$('#upl').click(function() {
-	//	window.location = "/uppost";
-		$(".mains").load("/uppost #mainsa");
+		var para = document.location.href.split("/");
+		var pnum = para[4];
+		console.log(pnum);
+		if(myname == poname){
+			location.href="/uppost/"+pnum;
+		}else{
+			alert("사용자가 아닙니다");
+		}
+		
 	});
 	$('#del').click(function() {
 		
@@ -102,7 +114,7 @@ $(document).ready(function(){
 		<h2><p th:text="${post.title}"></p></h2>
 		<span ></span>
 		<div class="hed">
-			<span>작성자:</span><span th:text="${post.name}"></span> <span>작성일:</span><span th:text="${post.postdate}"></span><span>조회수:<span th:text="${post.look}"></span></span>
+			<span>작성자:</span><span id="poname" th:text="${post.name}"></span> <span>작성일:</span><span th:text="${post.postdates}"></span><span style="float: right;">조회수:<span th:text="${post.look}"></span></span>
 		</div>
 		<div class="context"><span th:text="${post.context}"></span></div>
 		<div class="good">

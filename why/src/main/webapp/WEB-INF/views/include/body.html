@@ -20,7 +20,7 @@
         <a class="nav-link" href="/login">로그인</a>
       </li>
 	 <li th:if="${session.user}">
-		<span th:text="${session.user.name}" id="logout" class="nav-link" style="color:white;"> </span>
+		<span th:text="${session.user.name}" id="name" class="nav-link" style="color:white;"> </span>
       <li class="nav-item">
         <a class="nav-link" href="/logout">로그아웃</a>
       </li>

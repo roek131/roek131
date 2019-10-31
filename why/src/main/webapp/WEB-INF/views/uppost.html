@@ -6,36 +6,32 @@
 <th:block layout:fragment="page_head">
 	<title>수정</title>
 	<script>
-/* 	$(document).ready(function() {
+	$(document).ready(function(){
+		var para = document.location.href.split("/");
+		var pnum = para[4];
+
+		console.log(pnum);
 		
-		$("#postups").click(function() {
+	
+		$('#postups').click(function() {
 			var titles= $('#titles').val();
 			var context = $('#context').val();
-			if(titles==""){
-				alert("제목입력해주세여");
-			}if(context==""){
-				alert("내용을 적어주세요");
-			}else{
-		var query =  {	title : $('#titles').val(), context : $('#context').val()
-				};
-				console.log($("#titles"));
-				console.log($("#titles").val());
-//				insert ajax
-	 		$.ajax({
-			    	url: "/newboard",
-			    	type: "POST",
-			    	data : query,
-			    	dataType: "json", // controller return을 json으로 받음
-			    	success : function(data){
-			    		window.location = "/";
-			    	}, error: function(data) {
-			    		console.log(data);
-			    	}
-			
-			});  
-			}
+		
+			$.ajax({
+				url : "/upposts",
+				type : "POST",
+				dataType : 'text',
+				data : {
+					pnum : pnum, title:titles , context:context
+				},
+				success : function(data) {
+					console.log(data);
+				 alert("수정");
+				 }
+				 
+				});
 		});
-	}); */
+	});
 	</script>
 	<style>
 
@@ -47,15 +43,15 @@
 <!-- page_lib와 page_css 는 위와 같이 추가하여 사용-->
 <th:block layout:fragment="contents">
 <h3>게시글  수정</h3>
-    <div id="mainsa"style="padding : 30px;">
+    <div id="mainsa"style="padding : 30px;" th:each="post : ${post}">
           <div class="form-group">
             <label>제목</label>
-            <input type="text" class="form-control" id="titles">
+            <input type="text" class="form-control" id="titles"  th:value="${post.title}">
           </div>
 
           <div class="form-group">
             <label>내용</label>
-            <textarea name="content" class="form-control" rows="15" id="context"></textarea>
+            <textarea name="content" class="form-control" rows="15" id="context" th:text="${post.context}"></textarea>
           </div>
           <div class="form-group">
 			<label>파일</label>

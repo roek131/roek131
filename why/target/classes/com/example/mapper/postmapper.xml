@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.postmapper">
 <select id="postList" resultType="com.example.domain.postVO"> 
-select context,look,title,pnum,name,TO_CHAR(postdate, 'YYYY-MM-DD')as postdates from posts
+select context,look,title,pnum,name,TO_CHAR(postdate, 'YYYY-MM-DD')as postdates from posts ORDER BY pnum DESC
 </select> 
 <select id="postdetail" resultType="com.example.domain.postVO"> 
-select * from posts where pnum=#{pnum}
+select context,look,title,pnum,name,TO_CHAR(postdate, 'YYYY-MM-DD')as postdates from posts where pnum=#{pnum}
 </select>
 <select id="coment" resultType="com.example.domain.comentVO"> 
 select * from coment where pnum=#{pnum}
@@ -36,4 +36,10 @@ select * from member where id=#{id}
 		delete from posts where pnum = #{pnum} and name = #{name}
 </delete>
 
+<update id="postup" parameterType="com.example.domain.postVO">
+		update posts set
+		title = #{title},
+		context = #{context}
+		where pnum = #{pnum}
+</update>
 </mapper>

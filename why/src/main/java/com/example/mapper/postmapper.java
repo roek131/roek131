@@ -29,5 +29,7 @@ public interface postmapper {
 
 	public int postdel(@Param("pnum") String pnum, @Param("name") String name);
 
+	public Integer postup(@Param("title") String title, @Param("context") String context,@Param("pnum") String pnum);
+
 
 }

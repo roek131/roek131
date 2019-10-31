@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -168,13 +169,38 @@ public class HomeController {
 		
 			return json;
 	}
-	@RequestMapping(value = "/uppost", method = RequestMethod.GET)
-	public String uppost( Model model) {
-		System.out.println("수정페이지");
-		ArrayList<postVO> postlist = new ArrayList<postVO>();
+//	@RequestMapping(value = "/uppost/{pnum}", method = RequestMethod.GET)
+//	public String uppost( Model model,@PathVariable String pnum) {
+//		System.out.println("수정페이지");
+//		System.out.println(pnum);
+//		ArrayList<postVO> postlist = new ArrayList<postVO>();
 //			postlist = post.postList();
 //			model.addAttribute("post", postlist);
+////		
+//		return "uppost";
+//	}
+
+	@RequestMapping(value = "/uppost/{pnum}", method = RequestMethod.GET)
+	public String upposts( Model model,@PathVariable String pnum) {
+		System.out.println("수정페이지"+pnum);
+		
+		ArrayList<postVO> postlist = new ArrayList<postVO>();
+			postlist = post.postdetail(pnum);
+			model.addAttribute("post", postlist);
 //		
 		return "uppost";
 	}
+	
+	@RequestMapping(value = "/upposts", method = RequestMethod.POST)
+	@ResponseBody
+	public String upposts(Model model,@RequestParam String pnum,HttpSession session, HttpServletRequest request,@RequestParam String title,@RequestParam String context) {
+		System.out.println("호이"+pnum);
+		System.out.println(title + context);
+		
+		Integer postup = post.postup(title , context,pnum);
+		System.out.println(postup);
+		
+		return "success";
+	}
+
 }

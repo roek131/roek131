@@ -74,7 +74,13 @@ public class postserviceimplement implements postservice {
 	@Override
 	public int postdel(String pnum, String name) {
 		// TODO Auto-generated method stub
-		return mapper.postdel(pnum , name);
+		return mapper.postdel(pnum, name);
+	}
+
+	@Override
+	public Integer postup(String title, String context, String pnum) {
+		// TODO Auto-generated method stub
+		return mapper.postup(title, context, pnum);
 	}
 
 	
