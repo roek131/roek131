@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.example.domain.comentVO;
 import com.example.domain.memberVO;
 import com.example.domain.postVO;
+import com.example.domain.postfile;
 
 public interface postmapper {
 	public ArrayList<postVO> postList();
@@ -30,6 +31,12 @@ public interface postmapper {
 	public int postdel(@Param("pnum") String pnum, @Param("name") String name);
 
 	public Integer postup(@Param("title") String title, @Param("context") String context,@Param("pnum") String pnum);
+
+	public int lookup(@Param("pnum") String pnum);
+
+	public Integer fileup(@Param("filepath")String fileFullPath, @Param("filename")String originalFilename);
+
+	public ArrayList<postfile> file(@Param("pnum") String pnum);
 
 
 }

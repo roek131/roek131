@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.example.domain.comentVO;
 import com.example.domain.memberVO;
 import com.example.domain.postVO;
+import com.example.domain.postfile;
 
 
 public interface postservice {
@@ -30,6 +31,12 @@ public interface postservice {
 	public int postdel(String pnum, String name);
 
 	public Integer postup(String title, String context, String pnum);
+
+	public int lookup(String pnum);
+
+	public Integer fileup(String fileFullPath, String originalFilename);
+
+	public ArrayList<postfile> file(String pnum);
 
 	
 

@@ -42,4 +42,21 @@ select * from member where id=#{id}
 		context = #{context}
 		where pnum = #{pnum}
 </update>
+<update id="lookup" parameterType="com.example.domain.postVO">
+		update posts set
+		look = look+1
+		where pnum = #{pnum}
+</update>
+<insert id="fileup" parameterType="map">
+		insert into postfile(filecode,pnum,filepath,filename)
+		values(fileSEQ.nextval,POSTSEQ.currval,#{filepath},#{filename})
+</insert>
+<select id="file" resultType="com.example.domain.postfile"> 
+select * from postfile where pnum=#{pnum}
+</select>
+<!--페이징  -->
+<select id="totalcount" resultType="com.example.domain.postVO"> 
+select count(*) as totalcount from posts 
+</select> 
+
 </mapper>

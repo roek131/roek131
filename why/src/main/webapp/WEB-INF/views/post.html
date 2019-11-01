@@ -3,7 +3,9 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="include/layout">
+
 <th:block layout:fragment="page_head">
+<meta charset="utf-8">
 	<style>
 .mains {
 	margin-left: 10%;
@@ -117,8 +119,9 @@ $(document).ready(function(){
 			<span>작성자:</span><span id="poname" th:text="${post.name}"></span> <span>작성일:</span><span th:text="${post.postdates}"></span><span style="float: right;">조회수:<span th:text="${post.look}"></span></span>
 		</div>
 		<div class="context"><span th:text="${post.context}"></span></div>
-		<div class="good">
-			첨부파일
+		<div class="good" th:each="file : ${file}">
+			첨부파일<br>
+		<a th:href="@{/file/{pnum}(pnum=${file.filepath})}" download><span th:text="${file.filename}"></a>
 		</div>
 		<div>
 			<button id="del">삭제</button>

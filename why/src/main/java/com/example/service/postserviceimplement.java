@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.domain.comentVO;
 import com.example.domain.memberVO;
 import com.example.domain.postVO;
+import com.example.domain.postfile;
 import com.example.mapper.postmapper;
 
 import lombok.AllArgsConstructor;
@@ -81,6 +82,25 @@ public class postserviceimplement implements postservice {
 	public Integer postup(String title, String context, String pnum) {
 		// TODO Auto-generated method stub
 		return mapper.postup(title, context, pnum);
+	}
+
+	@Override
+	public int lookup(String pnum) {
+		// TODO Auto-generated method stub
+		return mapper.lookup(pnum);
+	}
+
+	@Override
+	public Integer fileup(String fileFullPath, String originalFilename) {
+		return mapper.fileup(fileFullPath,originalFilename);
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ArrayList<postfile> file(String pnum) {
+		// TODO Auto-generated method stub
+		return mapper.file(pnum);
 	}
 
 	
