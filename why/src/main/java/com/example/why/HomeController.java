@@ -203,8 +203,13 @@ public class HomeController {
 		comnets = post.coment(pnum);
 		file = post.file(pnum);
 		System.out.println(comnets);
+		if(file.isEmpty()) {
+			System.out.println("널");
+		}else {
 		String path = file.get(0).getFilepath();
 		System.out.println(path);
+		model.addAttribute("path", path);
+		}
 		Cookie[] cookies = request.getCookies();     
         Cookie viewCookie = null;
         if (cookies != null && cookies.length > 0) 
@@ -257,7 +262,7 @@ public class HomeController {
 		model.addAttribute("post", postdetail);
 		model.addAttribute("coment", comnets);
 		model.addAttribute("file", file);
-		model.addAttribute("path", path);
+		
 		System.out.println("파일"+file);
 		
 		return "post";
