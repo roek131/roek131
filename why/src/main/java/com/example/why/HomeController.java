@@ -9,6 +9,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -206,6 +207,7 @@ public class HomeController {
 		model.addAttribute("post", postdetail);
 		model.addAttribute("coment", comnets);
 		model.addAttribute("file", file);
+		System.out.println("파일"+file);
 		return "post";
 	}
 	
@@ -268,19 +270,22 @@ public class HomeController {
     public JSONObject uploads(MultipartHttpServletRequest multipartRequest) { //Multipart로 받는다.
           
         Iterator<String> itr =  multipartRequest.getFileNames();
-         System.out.println(multipartRequest);
+        List<MultipartFile> fileList =  multipartRequest.getFiles("files");
+         System.out.println(itr);
+         System.out.println("파일"+fileList);
         String filePath = "D:/test"; //설정파일로 뺀다.
         Map<String, String> map = new HashMap<String, String>();
 		Map<String, Integer> maps = new HashMap<String, Integer>();
-        while (itr.hasNext()) { //받은 파일들을 모두 돌린다.
-             
-            /* 기존 주석처리
+        
+		 while (itr.hasNext()) {  //받은 파일들을 모두 돌린다.
+	
+       
             MultipartFile mpf = multipartRequest.getFile(itr.next());
             String originFileName = mpf.getOriginalFilename();
             System.out.println("FILE_INFO: "+originFileName); //받은 파일 리스트 출력'
-            */
+          
              
-            MultipartFile mpf = multipartRequest.getFile(itr.next());
+//            MultipartFile mpf = multipartRequest.getFile(itr.next());
       
             String originalFilename = mpf.getOriginalFilename(); //파일명
            

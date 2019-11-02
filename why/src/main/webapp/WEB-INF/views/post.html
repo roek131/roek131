@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="include/layout">
 
 <th:block layout:fragment="page_head">
-<meta charset="utf-8">
+
 	<style>
 .mains {
 	margin-left: 10%;
@@ -44,6 +44,13 @@
 </style>
 <script>
 $(document).ready(function(){
+	var urls = $("#url").text();
+	var enc = encodeURI(urls);
+	var dec = decodeURI(enc);
+	var data1 = "[[${file}]]";
+	console.log(data1);
+	console.log(dec);
+	console.log(data1[pnum]);
 	var para = document.location.href.split("/");
 	var pnum = para[4];
 	var myname = $("#name").text();
@@ -107,6 +114,8 @@ $(document).ready(function(){
 			});
 	});
 });
+
+
 </script>
 	<title>게시글</title>
 </th:block>
@@ -121,7 +130,7 @@ $(document).ready(function(){
 		<div class="context"><span th:text="${post.context}"></span></div>
 		<div class="good" th:each="file : ${file}">
 			첨부파일<br>
-		<a th:href="@{/file/{pnum}(pnum=${file.filepath})}" download><span th:text="${file.filename}"></a>
+		<span id="url" th:text="${file.filepath}"></span><a th:href="@{/file/{pnum}(pnum=${file.filepath})}" download><span th:text="${file.filename}"></a>
 		</div>
 		<div>
 			<button id="del">삭제</button>
