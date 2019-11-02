@@ -55,8 +55,17 @@ select * from member where id=#{id}
 select * from postfile where pnum=#{pnum}
 </select>
 <!--페이징  -->
-<select id="totalcount" resultType="com.example.domain.postVO"> 
+<select id="totalcount" resultType="int"> 
 select count(*) as totalcount from posts 
 </select> 
-
+<select id="page" resultType="com.example.domain.postVO"> 
+<![CDATA[
+SELECT context,look,title,pnum,name,TO_CHAR(postdate, 'YYYY-MM-DD')as postdates
+  FROM (
+            select row_number() over(order by posts.postdate desc) as rnum, posts.*
+            from posts
+            )
+   WHERE rnum>= #{pnm} AND rnum <= #{anm}
+   ]]>
+</select> 
 </mapper>

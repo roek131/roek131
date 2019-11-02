@@ -38,6 +38,12 @@ public interface postservice {
 
 	public ArrayList<postfile> file(String pnum);
 
+	public Integer totalcount(postVO postVO);
+
+	public int totalcount();
+
+	public ArrayList<postVO> page(int anm, int pnm);
+
 	
 
 }

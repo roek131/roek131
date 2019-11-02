@@ -38,5 +38,11 @@ public interface postmapper {
 
 	public ArrayList<postfile> file(@Param("pnum") String pnum);
 
+	public Integer totalcount(postVO postVO);
+
+	public int totalcount();
+
+	public ArrayList<postVO> page(@Param("anm") int anm, @Param("pnm") int pnm);
+
 
 }

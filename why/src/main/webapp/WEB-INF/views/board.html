@@ -151,13 +151,13 @@
 			
 			uploadFileList = Object.keys(fileList);
 				 
-		        // 파일이 있는지 체크
+		    /*     // 파일이 있는지 체크
 		        if(uploadFileList.length == 0){
 		            // 파일등록 경고창
 		            alert("파일이 없습니다.");
 		            return;
 		        }
-		        
+		         */
 		        // 용량을 500MB를 넘을 경우 업로드 불가
 		        if(totalFileSize > maxUploadSize){
 		            // 파일 사이즈 초과 경고창
@@ -185,16 +185,18 @@
 			    	data : query,
 			    	dataType: "json", // controller return을 json으로 받음
 			    	success : function(data){
+			    		  window.location = "/";
 			    		 var form = $('#uploadForm');
-				            console.log($('#uploadForm'));
+				      	 console.log($('#uploadForm'));
 				            var formData = new FormData(document.getElementById("uploadForm"));
-				            console.log(formData);
-				            for(var i = 0; i < uploadFileList.length; i++){
+				           console.log(formData);
+				           for(var i = 0; i < uploadFileList.length; i++){
 				                formData.append('files', fileList[uploadFileList[i]]);
 				                console.log(formData);
 				                console.log(fileList);
 				                
 				            }
+				      if(formData != null) {
 			    		 $.ajax({
 				                url:"/fileUpload",
 				                data:formData,
@@ -208,7 +210,7 @@
 				                	 console.log(data);
 				                     if(data.name.length > 0){
 				                        alert("작성완료");
-				                    /*     window.location = "/"; */
+				                        window.location = "/";
 				                   
 				                    }else{
 				                        alert("실패");
@@ -216,6 +218,9 @@
 				                    } 
 				                }
 				            }); 
+				           }else{
+				        	 
+				           }
 			    	}, error: function(data) {
 			    		console.log(data);
 			    	}

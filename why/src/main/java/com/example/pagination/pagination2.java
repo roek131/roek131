@@ -3,7 +3,7 @@ package com.example.pagination;
 import lombok.Data;
 
 @Data
-public class pagination {
+public class pagination2 {
 		//한페이지당 게시글수
 	 private int pageSize = 10;
 	    
@@ -40,7 +40,7 @@ public class pagination {
 	    /** 다음 페이지 **/
 	    private int nextPage;
 	    
-	    public pagination(int listCnt, int curPage){
+	    public pagination2(int listCnt, int curPage){
 	        
 	        /**
 	         * 페이징 처리 순서

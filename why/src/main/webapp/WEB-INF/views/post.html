@@ -45,12 +45,20 @@
 <script>
 $(document).ready(function(){
 	var urls = $("#url").text();
+	var fname= $("#fname").text();
 	var enc = encodeURI(urls);
 	var dec = decodeURI(enc);
-	var data1 = "[[${file}]]";
+	var data1 = "[[${path}]]";
 	console.log(data1);
 	console.log(dec);
-	console.log(data1[pnum]);
+
+	var body = $('.good');
+	var html = ""; // jsp에 추가할 html코드 : 게시글 한개
+		html += '<a href="/file/'+fname+'" type="text/html" download="'+fname+'"">'+fname+'</a>';
+  
+	body.append(html); // tbody태그에 추가
+	
+	
 	var para = document.location.href.split("/");
 	var pnum = para[4];
 	var myname = $("#name").text();
@@ -130,7 +138,7 @@ $(document).ready(function(){
 		<div class="context"><span th:text="${post.context}"></span></div>
 		<div class="good" th:each="file : ${file}">
 			첨부파일<br>
-		<span id="url" th:text="${file.filepath}"></span><a th:href="@{/file/{pnum}(pnum=${file.filepath})}" download><span th:text="${file.filename}"></a>
+	<span style="display: none;" id="fname" th:text="${file.filename}"></a>
 		</div>
 		<div>
 			<button id="del">삭제</button>

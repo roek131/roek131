@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,6 +33,7 @@ import com.example.domain.comentVO;
 import com.example.domain.memberVO;
 import com.example.domain.postVO;
 import com.example.domain.postfile;
+import com.example.pagination.pagination;
 import com.example.service.postservice;
 import com.google.common.io.ByteStreams;
 
@@ -46,14 +48,61 @@ public class HomeController {
 	private postservice post;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home( Model model) {
-		System.out.println("아");
+	public String home( Model model,@ModelAttribute("postVO") postVO postVO, @RequestParam(defaultValue="1") int curPage
+			) {
+		String page="1";
+		System.out.println("아"+page);
 		ArrayList<postVO> postlist = new ArrayList<postVO>();
-			postlist = post.postList();
+		int listCnt = post.totalcount(postVO);
+	
+		 System.out.println(listCnt);
+		 pagination pagination = new pagination(listCnt, curPage);
+		 System.out.println(pagination);
+		 postVO.setStartIndex(pagination.getStartIndex());
+		 postVO.setCntPerPage(pagination.getPageSize());
+		 int numpage = Integer.parseInt(page);
+		 int pnm = numpage*10-10;
+		 int anm = numpage*10;
+		 int endpage = pagination.getEndPage()+1;
+		 System.out.println("앤드페이지"+endpage);
+		 System.out.println(pnm+"+"+ anm);
+		 postlist= post.page(anm,pnm);
+		 	System.out.println(postVO);
+//			postlist = post.postList();
 			model.addAttribute("post", postlist);
-		
+			model.addAttribute("page", pagination);
+			model.addAttribute("endpage", endpage);
 		return "home";
 	}
+	@RequestMapping(value = "/{page}", method = RequestMethod.GET)
+	public String homes( Model model,@ModelAttribute("postVO") postVO postVO, @RequestParam(defaultValue="1") int curPage,
+			@PathVariable String page) {
+		System.out.println("아"+page);
+		ArrayList<postVO> postlist = new ArrayList<postVO>();
+		int listCnt = post.totalcount(postVO);
+	
+		 System.out.println(listCnt);
+		 pagination pagination = new pagination(listCnt, curPage);
+		 System.out.println(pagination);
+		 postVO.setStartIndex(pagination.getStartIndex());
+		 postVO.setCntPerPage(pagination.getPageSize());
+		 int numpage = Integer.parseInt(page);
+		 int pnm = numpage*10-10;
+		 int anm = numpage*10;
+		 int endpage = pagination.getEndPage()+1;
+		 System.out.println("앤드페이지"+endpage);
+		 System.out.println(pnm+"+"+ anm);
+		 postlist= post.page(anm,pnm);
+		 	System.out.println(postVO);
+//			postlist = post.postList();
+			model.addAttribute("post", postlist);
+			model.addAttribute("page", pagination);
+			model.addAttribute("endpage", endpage);
+		return "home";
+	}
+	
+	
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
 	
@@ -154,7 +203,8 @@ public class HomeController {
 		comnets = post.coment(pnum);
 		file = post.file(pnum);
 		System.out.println(comnets);
-		
+		String path = file.get(0).getFilepath();
+		System.out.println(path);
 		Cookie[] cookies = request.getCookies();     
         Cookie viewCookie = null;
         if (cookies != null && cookies.length > 0) 
@@ -207,7 +257,9 @@ public class HomeController {
 		model.addAttribute("post", postdetail);
 		model.addAttribute("coment", comnets);
 		model.addAttribute("file", file);
+		model.addAttribute("path", path);
 		System.out.println("파일"+file);
+		
 		return "post";
 	}
 	

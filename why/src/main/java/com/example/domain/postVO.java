@@ -14,4 +14,13 @@ public class postVO {
  private String look;
  private Timestamp postdate;
  private String postdates;
+ private int totalcount;
+public void setStartIndex(int startIndex) {
+	// TODO Auto-generated method stub
+	
+}
+public void setCntPerPage(int pageSize) {
+	// TODO Auto-generated method stub
+	
+}
 }

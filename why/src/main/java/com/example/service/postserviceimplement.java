@@ -103,6 +103,24 @@ public class postserviceimplement implements postservice {
 		return mapper.file(pnum);
 	}
 
+	@Override
+	public Integer totalcount(postVO postVO) {
+		// TODO Auto-generated method stub
+		return mapper.totalcount(postVO);
+	}
+
+	@Override
+	public int totalcount() {
+		// TODO Auto-generated method stub
+		return mapper.totalcount();
+	}
+
+	@Override
+	public ArrayList<postVO> page(int anm, int pnm) {
+		// TODO Auto-generated method stub
+		return mapper.page(anm,pnm);
+	}
+
 	
 	
 
